@@ -5,7 +5,8 @@ import java.util.Map;
 
 import alb.util.console.Console;
 import alb.util.menu.Action;
-import uo.ri.bussiness.impl.admin.FindAllMechanics;
+import uo.ri.bussiness.AdminService;
+import uo.ri.bussiness.impl.AdminServiceImpl;
 import uo.ri.common.BusinessException;
 
 public class ListMechanicsAction implements Action {
@@ -15,10 +16,9 @@ public class ListMechanicsAction implements Action {
 
 		Console.println("\nListado de mecánicos\n");
 
-		FindAllMechanics findAllMechanics = new FindAllMechanics();
+		AdminService adminService = new AdminServiceImpl();
 
-		List<Map<String, Object>> mecanicos = findAllMechanics.execute();
-
+		List<Map<String, Object>> mecanicos = adminService.findAllMechanics();
 		for (Map<String, Object> mecanico : mecanicos) {
 			Console.println("Id: " + mecanico.get("id") + " - Nombre: " + mecanico.get("nombre") + " - Apellidos: "
 					+ mecanico.get("apellidos"));

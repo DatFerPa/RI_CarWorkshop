@@ -30,7 +30,6 @@ public class Console {
 
 	public static Integer readInt() {
 		try {
-			
 			return Integer.parseInt(kbd.readLine());
 			
 		} catch (NumberFormatException nfe) {
