@@ -2,9 +2,8 @@ package uo.ri.ui.admin.action;
 
 import alb.util.console.Console;
 import alb.util.menu.Action;
-import uo.ri.bussiness.AdminService;
-import uo.ri.bussiness.impl.AdminServiceImpl;
 import uo.ri.common.BusinessException;
+import uo.ri.conf.ServicesFactory;
 
 public class DeleteMechanicAction implements Action {
 
@@ -12,8 +11,9 @@ public class DeleteMechanicAction implements Action {
 	public void execute() throws BusinessException {
 		Long idMecanico = Console.readLong("Id de mecánico");
 
-		AdminService adminServie = new AdminServiceImpl();
-		adminServie.deleteMechanic(idMecanico);
+		ServicesFactory servicesFactory = new ServicesFactory();
+
+		servicesFactory.getAdminService().deleteMechanic(idMecanico);
 
 		Console.println("Se ha eliminado el mecánico");
 	}

@@ -10,10 +10,11 @@ import java.util.List;
 import java.util.Map;
 
 import alb.util.jdbc.Jdbc;
+import uo.ri.conf.Conf;
 
 public class FindAllMechanics {
 
-	private static String SQL = "select id, nombre, apellidos from TMecanicos";
+	private static String SQL_LISTAR_TODOS_MECANICOS = "SQL_LISTAR_TODOS_MECANICOS";
 
 	public List<Map<String, Object>> execute() {
 		List<Map<String, Object>> mecanicos = new ArrayList<Map<String, Object>>();
@@ -25,7 +26,7 @@ public class FindAllMechanics {
 		try {
 			c = Jdbc.getConnection();
 
-			pst = c.prepareStatement(SQL);
+			pst = c.prepareStatement(Conf.get(SQL_LISTAR_TODOS_MECANICOS));
 
 			rs = pst.executeQuery();
 			while (rs.next()) {

@@ -6,10 +6,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import alb.util.jdbc.Jdbc;
+import uo.ri.conf.Conf;
 
 public class AddMechanic {
-
-	private static String SQL = "insert into TMecanicos(nombre, apellidos) values (?, ?)";
+	private static String SQL_INSERTAR_MECANICO = "SQL_INSERTAR_MECANICO";
 
 	private String nombre;
 	private String apellidos;
@@ -28,7 +28,7 @@ public class AddMechanic {
 		try {
 			c = Jdbc.getConnection();
 
-			pst = c.prepareStatement(SQL);
+			pst = c.prepareStatement(Conf.get(SQL_INSERTAR_MECANICO));
 			pst.setString(1, nombre);
 			pst.setString(2, apellidos);
 
