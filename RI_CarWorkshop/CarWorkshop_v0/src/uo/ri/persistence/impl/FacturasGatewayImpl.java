@@ -1,5 +1,7 @@
 package uo.ri.persistence.impl;
 
-public class FacturasGatewayImpl {
+import uo.ri.persistence.FacturasGateway;
+
+public class FacturasGatewayImpl implements FacturasGateway{
 
 }

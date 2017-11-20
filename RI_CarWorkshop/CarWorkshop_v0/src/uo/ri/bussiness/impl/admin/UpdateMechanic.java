@@ -1,16 +1,12 @@
 package uo.ri.bussiness.impl.admin;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import alb.util.jdbc.Jdbc;
-import uo.ri.conf.Conf;
+import uo.ri.conf.PersistenceFactory;
+import uo.ri.persistence.MecanicosGateway;
 
 public class UpdateMechanic {
-
-	private static String SQL_ACTUALIZAR_MECANICO = "SQL_ACTUALIZAR_MECANICO";
 
 	private long id;
 	private String nombre;
@@ -23,25 +19,14 @@ public class UpdateMechanic {
 	}
 
 	public void execute() {
-		// Procesar
-		Connection c = null;
-		PreparedStatement pst = null;
-		ResultSet rs = null;
+
+		MecanicosGateway mecanicosGateway = new PersistenceFactory().getMecanicosGateway();
 
 		try {
-			c = Jdbc.getConnection();
-
-			pst = c.prepareStatement(Conf.get(SQL_ACTUALIZAR_MECANICO));
-			pst.setString(1, nombre);
-			pst.setString(2, apellidos);
-			pst.setLong(3, id);
-
-			pst.executeUpdate();
-
-		} catch (SQLException e) {
-			throw new RuntimeException(e);
-		} finally {
-			Jdbc.close(rs, pst, c);
+			mecanicosGateway.setConnection(Jdbc.getConnection());
+			mecanicosGateway.update(id, nombre, apellidos);
+		} catch (SQLException e1) {
+			throw new RuntimeException(e1);
 		}
 	}
 

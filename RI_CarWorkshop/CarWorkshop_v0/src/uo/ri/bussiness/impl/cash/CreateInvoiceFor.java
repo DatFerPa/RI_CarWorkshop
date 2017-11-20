@@ -67,6 +67,7 @@ public class CreateInvoiceFor {
 			factura.put("iva", iva);
 			factura.put("total", (importe * iva) + importe);
 			factura.put("fecha", fechaFactura);
+			
 
 			connection.commit();
 		} catch (SQLException e) {
