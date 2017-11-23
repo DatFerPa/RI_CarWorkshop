@@ -15,10 +15,10 @@ import uo.ri.persistence.MecanicosGateway;
 
 public class MecanicosGatewayImpl implements MecanicosGateway {
 
-	private static String SQL_INSERTAR_MECANICO = "SQL_INSERTAR_MECANICO";
-	private static String SQL_LISTAR_TODOS_MECANICOS = "SQL_LISTAR_TODOS_MECANICOS";
-	private static String SQL_ELIMINAR_MECANICO = "SQL_ELIMINAR_MECANICO";
-	private static String SQL_ACTUALIZAR_MECANICO = "SQL_ACTUALIZAR_MECANICO";
+	private static String SQL_INSERTAR_MECANICO = "SQL_INSERT_MECHANIC";
+	private static String SQL_LISTAR_TODOS_MECANICOS = "SQL_DELETE_MECHANIC";
+	private static String SQL_ELIMINAR_MECANICO = "SQL_LIST_MECHANICS";
+	private static String SQL_ACTUALIZAR_MECANICO = "SQL_UPDATE_MECHANIC";
 
 	Connection conection = null;
 
@@ -54,13 +54,14 @@ public class MecanicosGatewayImpl implements MecanicosGateway {
 
 				mecanicos.add(mecanico);
 			}
+			return mecanicos;
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
 		}finally {
 			Jdbc.close(pst);
 			Jdbc.close(conection);
 		}
-		return mecanicos;
+		
 	}
 
 	@Override
