@@ -11,11 +11,11 @@ public interface AveriasGateway {
 	
 	public void cambiarEstadoAverias(List<Long> idsAveria, String status);
 	
-	public void verificarAveriasTerminadas(List<Long> idsAveria) throws BusinessException;
+	public boolean verificarAveriasTerminadas(List<Long> idsAveria) throws BusinessException;
 	
 	public void actualizarImporteAveria(Long idAveria, double totalAveria);
 	
 	public double consultaImporteRepuestos(Long idAveria);
 	
-	public double consultaImporteManoObra(Long idAveria) throws BusinessException;
+	public double consultaImporteManoObra(Long idAveria);
 }

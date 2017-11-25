@@ -1,8 +1,6 @@
 package uo.ri.bussiness.impl.cash;
 
 import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Date;
 import java.util.HashMap;
@@ -13,7 +11,6 @@ import alb.util.date.DateUtil;
 import alb.util.jdbc.Jdbc;
 import alb.util.math.Round;
 import uo.ri.common.BusinessException;
-import uo.ri.conf.Conf;
 import uo.ri.conf.PersistenceFactory;
 import uo.ri.persistence.AveriasGateway;
 import uo.ri.persistence.FacturasGateway;
@@ -21,16 +18,6 @@ import uo.ri.persistence.impl.AveriasGatewayImpl;
 
 public class CreateInvoiceFor {
 
-	private static final String SQL_IMPORTE_REPUESTOS = "SQL_IMPORTE_REPUESTOS";
-
-	private static final String SQL_IMPORTE_MANO_OBRA = "SQL_IMPORTE_MANO_OBRA";
-
-	private static final String SQL_UPDATE_IMPORTE_AVERIA = "SQL_UPDATE_IMPORTE_AVERIA";
-
-	private static final String SQL_ACTUALIZAR_ESTADO_AVERIA = "SQL_ACTUALIZAR_ESTADO_AVERIA";
-
-	private static final String SQL_VERIFICAR_ESTADO_AVERIA = "SQL_VERIFICAR_ESTADO_AVERIA";
-	
 	private Connection connection;
 
 	private List<Long> idsAveria;
@@ -90,12 +77,14 @@ public class CreateInvoiceFor {
 		return DateUtil.fromString("1/7/2012").before(fechaFactura) ? 21.0 : 18.0;
 	}
 
-	@SuppressWarnings("resource")
 	private void verificarAveriasTerminadas(List<Long> idsAveria) throws SQLException, BusinessException {
 		AveriasGateway averiasGateway = new AveriasGatewayImpl();
 		try {
 			averiasGateway.setConnection(Jdbc.getConnection());
-			averiasGateway.verificarAveriasTerminadas(idsAveria);
+			boolean averiasCorrectas = averiasGateway.verificarAveriasTerminadas(idsAveria);
+			if(!averiasCorrectas) {
+				throw new BusinessException("Alguna averia no existe o no está terminada");
+			}
 		}catch(SQLException e) {
 			throw new RuntimeException(e);
 		}
