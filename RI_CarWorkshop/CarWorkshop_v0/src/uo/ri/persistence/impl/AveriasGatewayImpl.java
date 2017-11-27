@@ -47,11 +47,12 @@ public class AveriasGatewayImpl implements AveriasGateway {
 		}
 	}
 
+	
 	@Override
-	public boolean verificarAveriasTerminadas(List<Long> idsAveria) throws BusinessException {
+	public void verificarAveriasTerminadas(List<Long> idsAveria) throws BusinessException {
 		PreparedStatement pst = null;
 		ResultSet rs = null;
-		//quitar las comprobaciones
+
 		try {
 			pst = connection.prepareStatement(Conf.get(SQL_VERIFICAR_ESTADO_AVERIA));
 
@@ -60,23 +61,21 @@ public class AveriasGatewayImpl implements AveriasGateway {
 
 				rs = pst.executeQuery();
 				if (rs.next() == false) {
-					return false;
+					throw new BusinessException("No existe la averia " + idAveria);
 				}
 
 				String status = rs.getString(1);
 				if (!"TERMINADA".equalsIgnoreCase(status)) {
-					return false;
+					throw new BusinessException("No está terminada la avería " + idAveria);
 				}
 
 				rs.close();
 			}
-			
 		} catch(SQLException e) {
 			throw new RuntimeException(e);
-		}  finally {
+		} finally {
 			Jdbc.close(rs, pst);
 		}
-		return true;
 	}
 
 	@Override
@@ -119,7 +118,7 @@ public class AveriasGatewayImpl implements AveriasGateway {
 	}
 
 	@Override
-	public double consultaImporteManoObra(Long idAveria) {
+	public double consultaImporteManoObra(Long idAveria) throws BusinessException {
 		PreparedStatement pst = null;
 		ResultSet rs = null;
 
@@ -128,6 +127,9 @@ public class AveriasGatewayImpl implements AveriasGateway {
 			pst.setLong(1, idAveria);
 
 			rs = pst.executeQuery();
+			if (rs.next() == false) {
+				throw new BusinessException("La averia no existe o no se puede facturar");
+			}
 
 			return rs.getDouble(1);
 

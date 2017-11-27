@@ -81,10 +81,8 @@ public class CreateInvoiceFor {
 		AveriasGateway averiasGateway = new AveriasGatewayImpl();
 		try {
 			averiasGateway.setConnection(Jdbc.getConnection());
-			boolean averiasCorrectas = averiasGateway.verificarAveriasTerminadas(idsAveria);
-			if(!averiasCorrectas) {
-				throw new BusinessException("Alguna averia no existe o no está terminada");
-			}
+			averiasGateway.verificarAveriasTerminadas(idsAveria);
+			
 		}catch(SQLException e) {
 			throw new RuntimeException(e);
 		}
