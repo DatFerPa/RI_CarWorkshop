@@ -25,7 +25,6 @@ public class MecanicosGatewayImpl implements MecanicosGateway {
 	@Override
 	public void setConnection(Connection connection) {
 		this.conection = connection;
-
 	}
 
 	@Override
@@ -54,14 +53,14 @@ public class MecanicosGatewayImpl implements MecanicosGateway {
 
 				mecanicos.add(mecanico);
 			}
-			return mecanicos;
+			
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
 		}finally {
 			Jdbc.close(pst);
 			Jdbc.close(conection);
 		}
-		
+		return mecanicos;
 	}
 
 	@Override

@@ -10,7 +10,6 @@ public class AddMechanicAction implements Action {
 	@Override
 	public void execute() throws BusinessException {
 
-		// Pedir datos
 		String nombre = Console.readString("Nombre");
 		String apellidos = Console.readString("Apellidos");
 
@@ -18,7 +17,6 @@ public class AddMechanicAction implements Action {
 
 		servicesFactory.getAdminService().newMechanic(nombre, apellidos);
 
-		// Mostrar resultado
 		Console.println("Nuevo mecánico añadido");
 	}
 
