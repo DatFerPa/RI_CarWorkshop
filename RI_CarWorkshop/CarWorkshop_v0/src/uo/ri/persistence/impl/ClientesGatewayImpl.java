@@ -15,6 +15,13 @@ import uo.ri.persistence.ClientesGateway;
 
 public class ClientesGatewayImpl implements ClientesGateway {
 
+	private static String SQL_FIND_CLIENTE_ID = "SQL_FIND_CLIENTE_ID";
+	private static String SQL_FIND_CLIENTES = "SQL_FIND_CLIENTES";
+	private static String SQL_UPDATE_CLIENTE = "SQL_UPDATE_CLIENTE";	
+	private static String SQL_SAVE_CLIENTE = "SQL_SAVE_CLIENTE";
+	private static String SQL_DELETE_CLIENTE = "SQL_DELETE_CLIENTE";
+	
+	
 	Connection conection = null;
 
 	@Override
@@ -30,13 +37,20 @@ public class ClientesGatewayImpl implements ClientesGateway {
 		ResultSet rs = null;
 		try {
 
-			pst = conection.prepareStatement(Conf.get());
+			pst = conection.prepareStatement(Conf.get(SQL_FIND_CLIENTE_ID));
+			pst.setLong(1, id);
 
 			rs = pst.executeQuery();
 
 			cliente.put("id", rs.getLong(1));
 			cliente.put("nombre", rs.getString(2));
 			cliente.put("apellidos", rs.getString(3));
+			cliente.put("street",rs.getString(4));
+			cliente.put("city",rs.getString(5));
+			cliente.put("zipcode",rs.getString(6));
+			cliente.put("dni",rs.getString(7));
+			cliente.put("telefono",rs.getString(8));
+			cliente.put("email",rs.getString(9));
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
 		} finally {
@@ -55,8 +69,8 @@ public class ClientesGatewayImpl implements ClientesGateway {
 		ResultSet rs = null;
 
 		try {
-			pst = conection.prepareStatement(Conf.get());
-
+			pst = conection.prepareStatement(Conf.get(SQL_FIND_CLIENTES));
+			
 			rs = pst.executeQuery();
 			while (rs.next()) {
 				HashMap<String, Object> cliente = new HashMap<String, Object>();
@@ -64,6 +78,12 @@ public class ClientesGatewayImpl implements ClientesGateway {
 				cliente.put("id", rs.getLong(1));
 				cliente.put("nombre", rs.getString(2));
 				cliente.put("apellidos", rs.getString(3));
+				cliente.put("street",rs.getString(4));
+				cliente.put("city",rs.getString(5));
+				cliente.put("zipcode",rs.getString(6));
+				cliente.put("dni",rs.getString(7));
+				cliente.put("telefono",rs.getString(8));
+				cliente.put("email",rs.getString(9));
 
 				clientes.add(cliente);
 			}
@@ -85,7 +105,7 @@ public class ClientesGatewayImpl implements ClientesGateway {
 		try {
 			conection = Jdbc.getConnection();
 
-			pst = conection.prepareStatement(Conf.get());
+			pst = conection.prepareStatement(Conf.get(SQL_UPDATE_CLIENTE));
 			pst.setString(1, nombre);
 			pst.setString(2, apellidos);
 			pst.setString(3, street);
@@ -112,7 +132,7 @@ public class ClientesGatewayImpl implements ClientesGateway {
 			String email,String dni) {
 		PreparedStatement pst = null;
 		try {
-			pst = conection.prepareStatement(Conf.get());
+			pst = conection.prepareStatement(Conf.get(SQL_SAVE_CLIENTE));
 			pst.setString(1, nombre);
 			pst.setString(2, apellidos);
 			pst.setString(3, street);
@@ -137,7 +157,7 @@ public class ClientesGatewayImpl implements ClientesGateway {
 		PreparedStatement pst = null;
 		
 		try {
-			pst = conection.prepareStatement(Conf.get());
+			pst = conection.prepareStatement(Conf.get(SQL_DELETE_CLIENTE));
 			pst.setLong(1, id);
 			
 		}catch(SQLException e) {
@@ -147,6 +167,18 @@ public class ClientesGatewayImpl implements ClientesGateway {
 			Jdbc.close(conection);
 		}
 
+	}
+
+	@Override
+	public void delete_mediopago(Long id) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void delte_recomendaciones(Long id) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

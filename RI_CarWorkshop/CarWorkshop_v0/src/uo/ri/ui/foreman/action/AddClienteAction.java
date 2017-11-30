@@ -9,6 +9,7 @@ public class AddClienteAction implements Action{
 	@Override
 	public void execute() throws Exception {
 		//pedimos los datos 
+		String dni = Console.readString("dni");
 		String nombre = Console.readString("Nombre");
 		String apellidos = Console.readString("Apellidos");
 		String calle = Console.readString("Calle");
@@ -19,7 +20,7 @@ public class AddClienteAction implements Action{
 		
 		ServicesFactory servicesFactory = new ServicesFactory();
 		
-		servicesFactory.getForemanService().newCliente(nombre, apellidos, calle, ciudad, zipcode, telefono, email);
+		servicesFactory.getForemanService().newCliente(dni,nombre, apellidos, calle, ciudad, zipcode, telefono, email);
 		
 		Console.println("Nuevo cliente añadido");
 	}

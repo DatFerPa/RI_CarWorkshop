@@ -34,6 +34,7 @@ public class CreateCliente {
 		try {
 			clientesGateway.setConnection(Jdbc.getConnection());
 			clientesGateway.save(nombre, apellidos, calle, ciudad, zipcode, telefono, email,dni);
+			
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
 		}

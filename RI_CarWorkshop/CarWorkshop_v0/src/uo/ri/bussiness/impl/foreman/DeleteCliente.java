@@ -16,8 +16,10 @@ public class DeleteCliente {
 	
 	public void execute() {
 		ClientesGateway clientesGateway = new PersistenceFactory().getClientesGateway();
-		try {
+		try {		
 			clientesGateway.setConnection(Jdbc.getConnection());
+			clientesGateway.delete_mediopago(idCliente);
+			clientesGateway.delte_recomendaciones(idCliente);
 			clientesGateway.delete(idCliente);
 		}catch(SQLException e) {
 			throw new RuntimeException(e);
