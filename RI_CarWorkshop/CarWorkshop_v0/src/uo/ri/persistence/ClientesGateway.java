@@ -30,8 +30,20 @@ public interface ClientesGateway {
 
     public void delte_recomendaciones(Long id);
 
+    /**
+     * Método que consulta el último id de la tabla de los clientes
+     * 
+     * @return el identificador del último cliente
+     */
     public long getLastClienteId();
 
+    /**
+     * Método que devuleve el status de las facturas de un clinete
+     * 
+     * @param id,
+     *            el identificador del cliente del cual se quieren sacar los status
+     * @return
+     */
     public List<String> getEstadosFacturasCliente(Long id);
 
     public int getNumeroCochesCliente(Long id);
@@ -41,5 +53,10 @@ public interface ClientesGateway {
     public void createBono(Long idCliente, String type, double acumulado, double disponible, String codigo,
 	    String descripcion);
 
+    /**
+     * Método que consulta el último valor de la columna código de la tabla TBonos
+     * 
+     * @return el valor de dicho código
+     */
     public String getUltimoCodigo();
 }

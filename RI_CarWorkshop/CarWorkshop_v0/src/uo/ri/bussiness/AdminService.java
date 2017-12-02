@@ -13,5 +13,8 @@ public interface AdminService {
 
     public List<Map<String, Object>> findAllMechanics();
 
+    /**
+     * Método que genera un bono cada tres averias pagadas
+     */
     public void generarBonosTresAverias();
 }

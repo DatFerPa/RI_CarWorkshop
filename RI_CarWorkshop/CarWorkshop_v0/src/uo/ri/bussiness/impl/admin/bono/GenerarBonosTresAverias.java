@@ -12,8 +12,20 @@ import uo.ri.persistence.ClientesGateway;
 import uo.ri.persistence.impl.AveriasGatewayImpl;
 import uo.ri.persistence.impl.ClientesGatewayImpl;
 
+/**
+ * @author Fernando
+ *
+ */
+/**
+ * @author Fernando
+ *
+ */
 public class GenerarBonosTresAverias {
 
+    /**
+     * Método base para ejecutar la accion de generar bonos cuando el usuario tiene
+     * 3 averias pagadas
+     */
     public void execute() {
 	ServicesFactory servicesFactory = new ServicesFactory();
 	List<Map<String, Object>> clientes = servicesFactory.getForemanService().findAllClients();
@@ -27,6 +39,13 @@ public class GenerarBonosTresAverias {
 
     }
 
+    /**
+     * Método para recibir la lista de averias que tiene un cliente
+     * 
+     * @param id
+     *            el identificador del cliente
+     * @return la lista con un mapa(clave/valor) , con las averias
+     */
     private List<Map<String, Object>> getAveriasCliente(Long id) {
 	ClientesGateway clientesGateway = new ClientesGatewayImpl();
 	List<Map<String, Object>> averias = null;
@@ -39,6 +58,14 @@ public class GenerarBonosTresAverias {
 	return averias;
     }
 
+    /**
+     * Método que se encarga de llamar al generador de bonos cada 3 averia pagadas
+     * 
+     * @param averias
+     *            averias que tiene cada cliente
+     * @param idCliente
+     *            identificador del cliente
+     */
     private void cadaTresAverias(List<Map<String, Object>> averias, Long idCliente) {
 	int contador = 0;
 	List<Long> idsParaCada3 = new ArrayList<Long>();
@@ -53,6 +80,15 @@ public class GenerarBonosTresAverias {
 	}
     }
 
+    /**
+     * Método básico que genera un bono para las 3 averias pagadas
+     * 
+     * @param identificadoresAverias
+     *            lista con los identificadores de las averias que han dado lugar a
+     *            ese bono
+     * @param idCliente
+     *            identificador del cliente que va a recibir dicho bono
+     */
     private void generarBonoPara3averias(List<Long> identificadoresAverias, Long idCliente) {
 	ClientesGateway clientesGateway = new ClientesGatewayImpl();
 	AveriasGateway averiasGateway = new AveriasGatewayImpl();
@@ -69,6 +105,12 @@ public class GenerarBonosTresAverias {
 	}
     }
 
+    /**
+     * Método que captura el código más alto hasta el momento, y genera uno nuevo
+     * para otro bono
+     * 
+     * @return un String, que será el nuevo codigo del bono
+     */
     private String getCodgioActual() {
 	ClientesGateway clientesGateway = new ClientesGatewayImpl();
 	String code = "";

@@ -17,6 +17,13 @@ public class crearRecomendacionUltimoCliente {
 	this.idRecomendador = idRecomendador;
     }
 
+    /**
+     * Método que genera una recomendación
+     * 
+     * @throws BusinessException,
+     *             cuando el usuario que definimos como recomendador no tiene
+     *             Facturas pagadas
+     */
     public void execute() throws BusinessException {
 	ClientesGateway clientesGateway = new PersistenceFactory().getClientesGateway();
 	try {
@@ -33,6 +40,13 @@ public class crearRecomendacionUltimoCliente {
 	}
     }
 
+    /**
+     * Método que devuelve un booleano en función de si el clinete que le pasamos
+     * con un id, tiene facturas pagadas
+     * 
+     * @param idRecomendador
+     * 
+     */
     private boolean recomendadorConFactura(Long idRecomendador) {
 	ClientesGateway clientesGateway = new PersistenceFactory().getClientesGateway();
 	try {
