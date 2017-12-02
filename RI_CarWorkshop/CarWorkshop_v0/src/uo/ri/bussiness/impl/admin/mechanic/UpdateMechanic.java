@@ -1,4 +1,4 @@
-package uo.ri.bussiness.impl.admin;
+package uo.ri.bussiness.impl.admin.mechanic;
 
 import java.sql.SQLException;
 

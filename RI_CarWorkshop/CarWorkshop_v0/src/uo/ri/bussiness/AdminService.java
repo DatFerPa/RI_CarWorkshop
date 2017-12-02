@@ -5,12 +5,13 @@ import java.util.Map;
 
 public interface AdminService {
 
-	public void newMechanic(String nombre, String apellidos,String dni);
+    public void newMechanic(String nombre, String apellidos, String dni);
 
-	public void deleteMechanic(Long id);
+    public void deleteMechanic(Long id);
 
-	public void updateMechanic(Long id, String nombre, String apellidos);
+    public void updateMechanic(Long id, String nombre, String apellidos);
 
-	public List<Map<String, Object>> findAllMechanics();
-
+    public List<Map<String, Object>> findAllMechanics();
+    
+    public void generarBonosTresAverias();
 }

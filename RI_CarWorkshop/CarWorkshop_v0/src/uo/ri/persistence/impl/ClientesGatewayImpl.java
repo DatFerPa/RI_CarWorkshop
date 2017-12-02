@@ -28,6 +28,9 @@ public class ClientesGatewayImpl implements ClientesGateway {
     private static String SQL_ULTIMO_ID_CLIENTE = "SQL_ULTIMO_ID_CLIENTE";
     private static String SQL_FIND_FACTURAS_ESTADOS = "SQL_FIND_FACTURAS_ESTADOS";
     private static String SQL_NUMERO_COCHES_CLIENTE = "SQL_NUMERO_COCHES_CLIENTE";
+    private static String SQL_FIND_AVERIAS_CLIENTE = "SQL_FIND_AVERIAS_CLIENTE";
+    private static String SQL_CREAR_BONO = "SQL_CREAR_BONO";
+    private static String SQL_GET_ULTIMO_CODIGO = "SQL_GET_ULTIMO_CODIGO";
 
     Connection conection = null;
 
@@ -38,7 +41,7 @@ public class ClientesGatewayImpl implements ClientesGateway {
 
     @Override
     public Map<String, Object> findById(Long id) {
-	HashMap<String, Object> cliente = new HashMap<String, Object>();
+	HashMap<String, Object> cliente = null;
 
 	PreparedStatement pst = null;
 	ResultSet rs = null;
@@ -48,16 +51,18 @@ public class ClientesGatewayImpl implements ClientesGateway {
 	    pst.setLong(1, id);
 
 	    rs = pst.executeQuery();
-
-	    cliente.put("id", rs.getLong(1));
-	    cliente.put("nombre", rs.getString(2));
-	    cliente.put("apellidos", rs.getString(3));
-	    cliente.put("street", rs.getString(4));
-	    cliente.put("city", rs.getString(5));
-	    cliente.put("zipcode", rs.getString(6));
-	    cliente.put("dni", rs.getString(7));
-	    cliente.put("telefono", rs.getString(8));
-	    cliente.put("email", rs.getString(9));
+	    if (rs.next()) {
+		cliente = new HashMap<String, Object>();
+		cliente.put("id", rs.getLong(1));
+		cliente.put("nombre", rs.getString(2));
+		cliente.put("apellidos", rs.getString(3));
+		cliente.put("street", rs.getString(4));
+		cliente.put("city", rs.getString(5));
+		cliente.put("zipcode", rs.getString(6));
+		cliente.put("dni", rs.getString(7));
+		cliente.put("telefono", rs.getString(8));
+		cliente.put("email", rs.getString(9));
+	    }
 	} catch (SQLException e) {
 	    throw new RuntimeException(e);
 	} finally {
@@ -345,6 +350,74 @@ public class ClientesGatewayImpl implements ClientesGateway {
 	    Jdbc.close(rs, pst);
 	}
 	return numVehiculos;
+    }
+
+    @Override
+    public List<Map<String, Object>> getAveriasCliente(Long id) {
+	List<Map<String, Object>> averias = new ArrayList<Map<String, Object>>();
+	PreparedStatement pst = null;
+	ResultSet rs = null;
+
+	try {
+	    pst = conection.prepareStatement(Conf.get(SQL_FIND_AVERIAS_CLIENTE));
+	    pst.setLong(1, id);
+	    rs = pst.executeQuery();
+	    while (rs.next()) {
+		HashMap<String, Object> averia = new HashMap<String, Object>();
+
+		averia.put("id", rs.getLong(1));
+		averias.add(averia);
+	    }
+
+	} catch (SQLException e) {
+	    throw new RuntimeException(e);
+	} finally {
+	    Jdbc.close(pst);
+	    Jdbc.close(conection);
+	}
+	return averias;
+
+    }
+
+    @Override
+    public void createBono(Long idCliente, String type, double acumulado, double disponible, String codigo,
+	    String descripcion) {
+	PreparedStatement pst = null;
+	try {
+	    pst = conection.prepareStatement(Conf.get(SQL_CREAR_BONO));
+	    pst.setString(1, "TBonos");
+	    pst.setDouble(2, 0);
+	    pst.setDouble(3, 20);
+	    pst.setLong(4, idCliente);
+	    pst.setString(5, codigo);
+	    pst.setString(6, descripcion);
+	    pst.executeUpdate();
+
+	} catch (SQLException e) {
+	    throw new RuntimeException(e);
+	} finally {
+	    Jdbc.close(pst);
+	    Jdbc.close(conection);
+	}
+    }
+
+    @Override
+    public String getUltimoCodigo() {
+	PreparedStatement pst = null;
+	ResultSet rs = null;
+
+	try {
+	    pst = conection.prepareStatement(Conf.get(SQL_GET_ULTIMO_CODIGO));
+	    rs = pst.executeQuery();
+	    rs.next();
+
+	    return rs.getString(1);
+
+	} catch (SQLException e) {
+	    throw new RuntimeException(e);
+	} finally {
+	    Jdbc.close(rs, pst);
+	}
     }
 
 }

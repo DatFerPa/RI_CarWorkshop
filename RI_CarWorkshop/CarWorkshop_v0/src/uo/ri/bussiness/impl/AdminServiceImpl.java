@@ -4,10 +4,11 @@ import java.util.List;
 import java.util.Map;
 
 import uo.ri.bussiness.AdminService;
-import uo.ri.bussiness.impl.admin.AddMechanic;
-import uo.ri.bussiness.impl.admin.DeleteMechanic;
-import uo.ri.bussiness.impl.admin.FindAllMechanics;
-import uo.ri.bussiness.impl.admin.UpdateMechanic;
+import uo.ri.bussiness.impl.admin.bono.GenerarBonosTresAverias;
+import uo.ri.bussiness.impl.admin.mechanic.AddMechanic;
+import uo.ri.bussiness.impl.admin.mechanic.DeleteMechanic;
+import uo.ri.bussiness.impl.admin.mechanic.FindAllMechanics;
+import uo.ri.bussiness.impl.admin.mechanic.UpdateMechanic;
 
 public class AdminServiceImpl implements AdminService {
 
@@ -32,6 +33,11 @@ public class AdminServiceImpl implements AdminService {
 	@Override
 	public List<Map<String, Object>> findAllMechanics() {
 		return new FindAllMechanics().execute();
+	}
+
+	@Override
+	public void generarBonosTresAverias() {
+	  new GenerarBonosTresAverias().execute();	    
 	}
 
 }

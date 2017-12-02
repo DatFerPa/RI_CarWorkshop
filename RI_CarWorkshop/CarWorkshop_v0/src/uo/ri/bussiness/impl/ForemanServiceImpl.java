@@ -40,10 +40,7 @@ public class ForemanServiceImpl implements ForemanService {
 
 	}
 
-	@Override
-	public Map<String, Object> detalleCliente(Long id) {
-		return new FindCliente(id).execute();
-	}
+
 
 	@Override
 	public List<Map<String, Object>> finClientesRecomendados(Long id) {
@@ -54,6 +51,11 @@ public class ForemanServiceImpl implements ForemanService {
 	public void crearRecomendacionUltimoCliente(Long idRecomendador) throws BusinessException {
 	    new  crearRecomendacionUltimoCliente(idRecomendador).execute();
 	    
+	}
+
+	@Override
+	public Map<String, Object> findCliente(Long id) throws BusinessException {
+	    return new FindCliente(id).execute();
 	}
 
 }

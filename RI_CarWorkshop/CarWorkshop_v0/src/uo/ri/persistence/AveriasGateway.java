@@ -18,4 +18,6 @@ public interface AveriasGateway {
 	public double consultaImporteRepuestos(Long idAveria);
 	
 	public double consultaImporteManoObra(Long idAveria) throws BusinessException;
+	
+	public void actualizarUsadaBono(Long idAveria, boolean usadaBono);
 }

@@ -18,7 +18,7 @@ public class AveriasGatewayImpl implements AveriasGateway {
 	private static String SQL_VERIFICAR_ESTADO_AVERIA = "SQL_VERIFICAR_ESTADO_AVERIA";
 	private static final String SQL_IMPORTE_REPUESTOS = "SQL_IMPORTE_REPUESTOS";
 	private static final String SQL_IMPORTE_MANO_OBRA = "SQL_IMPORTE_MANO_OBRA";
-	
+	private static String SQL_ACTUALIZAR_USADA_BONO = "SQL_ACTUALIZAR_USADA_BONO";
 	
 	Connection connection = null;
 	
@@ -138,6 +138,23 @@ public class AveriasGatewayImpl implements AveriasGateway {
 		} finally {
 			Jdbc.close(rs, pst);
 		}
+	}
+
+	@Override
+	public void actualizarUsadaBono(Long idAveria, boolean usada) {
+	    PreparedStatement pst = null;
+
+		try {
+			pst = connection.prepareStatement(Conf.get(SQL_ACTUALIZAR_USADA_BONO));
+			pst.setBoolean(1, usada);
+			pst.setLong(2, idAveria);
+			pst.executeUpdate();
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		} finally {
+			Jdbc.close(pst);
+		}
+	    
 	}
 
 	
