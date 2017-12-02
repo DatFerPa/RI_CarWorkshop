@@ -10,18 +10,18 @@ import uo.ri.persistence.ClientesGateway;
 
 public class FindAllClientes {
 
-	public List<Map<String, Object>> execute() {
-		ClientesGateway clienteGateway = new PersistenceFactory().getClientesGateway();
-		List<Map<String, Object>> clientes = null;
-		try {
-			clienteGateway.setConnection(Jdbc.getConnection());
-			clientes = clienteGateway.findAll();
-		} catch (SQLException e) {
-			throw new RuntimeException(e);
-		}
-
-		return clientes;
-
+    public List<Map<String, Object>> execute() {
+	ClientesGateway clienteGateway = new PersistenceFactory().getClientesGateway();
+	List<Map<String, Object>> clientes = null;
+	try {
+	    clienteGateway.setConnection(Jdbc.getConnection());
+	    clientes = clienteGateway.findAll();
+	} catch (SQLException e) {
+	    throw new RuntimeException(e);
 	}
+
+	return clientes;
+
+    }
 
 }

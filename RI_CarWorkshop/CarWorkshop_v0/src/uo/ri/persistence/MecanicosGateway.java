@@ -6,16 +6,16 @@ import java.util.Map;
 
 public interface MecanicosGateway {
 
-	public void setConnection(Connection connection);
+    public void setConnection(Connection connection);
 
-	public Map<String, Object> findById(Long id);
+    public Map<String, Object> findById(Long id);
 
-	public List<Map<String, Object>> findAll();
+    public List<Map<String, Object>> findAll();
 
-	public void update(Long id, String nombre, String apellidos);
+    public void update(Long id, String nombre, String apellidos);
 
-	public void save(String nombre, String apellidos,String dni);
+    public void save(String nombre, String apellidos, String dni);
 
-	public void delete(Long id);
+    public void delete(Long id);
 
 }

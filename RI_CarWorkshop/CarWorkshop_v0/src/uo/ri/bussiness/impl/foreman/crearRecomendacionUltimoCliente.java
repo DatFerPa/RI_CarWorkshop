@@ -24,7 +24,7 @@ public class crearRecomendacionUltimoCliente {
 	    if (recomendadorConFactura(idRecomendador)) {
 		clientesGateway.setConnection(Jdbc.getConnection());
 		clientesGateway.createRecomendacion(idRecomndado, idRecomendador);
-	    }else {
+	    } else {
 		throw new BusinessException("Cliente no aceptado para recomendar: no tiene facturas abonadas");
 	    }
 

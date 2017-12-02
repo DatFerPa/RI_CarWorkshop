@@ -19,8 +19,8 @@ public class GenerarBonosTresAverias {
 	List<Map<String, Object>> clientes = servicesFactory.getForemanService().findAllClients();
 	for (Map<String, Object> cliente : clientes) {
 	    List<Map<String, Object>> averias = getAveriasCliente((long) cliente.get("id"));
-	    if(averias != null) {
-	    cadaTresAverias(averias,(long) cliente.get("id"));
+	    if (averias != null) {
+		cadaTresAverias(averias, (long) cliente.get("id"));
 	    }
 	    averias = null;
 	}
@@ -39,32 +39,32 @@ public class GenerarBonosTresAverias {
 	return averias;
     }
 
-    private void cadaTresAverias(List<Map<String, Object>> averias,Long idCliente) {
+    private void cadaTresAverias(List<Map<String, Object>> averias, Long idCliente) {
 	int contador = 0;
 	List<Long> idsParaCada3 = new ArrayList<Long>();
 	for (Map<String, Object> averia : averias) {
 	    ++contador;
 	    idsParaCada3.add((long) averia.get("id"));
 	    if (contador == 3) {
-		generarBonoPara3averias(idsParaCada3,idCliente);
+		generarBonoPara3averias(idsParaCada3, idCliente);
 		idsParaCada3 = new ArrayList<Long>();
 		contador = 0;
 	    }
 	}
     }
 
-    private void generarBonoPara3averias(List<Long> identificadoresAverias,Long idCliente) {
+    private void generarBonoPara3averias(List<Long> identificadoresAverias, Long idCliente) {
 	ClientesGateway clientesGateway = new ClientesGatewayImpl();
 	AveriasGateway averiasGateway = new AveriasGatewayImpl();
 	try {
-	    for(Long identificador: identificadoresAverias) {
+	    for (Long identificador : identificadoresAverias) {
 		averiasGateway.setConnection(Jdbc.getConnection());
 		averiasGateway.actualizarUsadaBono(identificador, true);
 	    }
 	    clientesGateway.setConnection(Jdbc.getConnection());
-	    clientesGateway.createBono(idCliente,"TBonos",0,20,getCodgioActual(),"Por tres averias");
-	    
-	}catch(SQLException e) {
+	    clientesGateway.createBono(idCliente, "TBonos", 0, 20, getCodgioActual(), "Por tres averias");
+
+	} catch (SQLException e) {
 	    throw new RuntimeException(e);
 	}
     }
@@ -76,9 +76,9 @@ public class GenerarBonosTresAverias {
 	    clientesGateway.setConnection(Jdbc.getConnection());
 	    code = clientesGateway.getUltimoCodigo();
 	    String[] codeArray = code.split("B");
-	    int valorNuevo = Integer.parseInt(codeArray[1])+10;
-	    code = "B"+valorNuevo;
-	}catch(SQLException e) {
+	    int valorNuevo = Integer.parseInt(codeArray[1]) + 10;
+	    code = "B" + valorNuevo;
+	} catch (SQLException e) {
 	    throw new RuntimeException(e);
 	}
 	return code;

@@ -10,19 +10,19 @@ import uo.ri.persistence.impl.FacturasGatewayImpl;
 import uo.ri.persistence.impl.MecanicosGatewayImpl;
 
 public class PersistenceFactory {
-	public MecanicosGateway getMecanicosGateway() {
-		return new MecanicosGatewayImpl();
-	}
+    public MecanicosGateway getMecanicosGateway() {
+	return new MecanicosGatewayImpl();
+    }
 
-	public FacturasGateway getFacturaGateway() {
-		return new FacturasGatewayImpl();
-	}
-	
-	public AveriasGateway getAveriasGateway() {
-		return new AveriasGatewayImpl();
-	}
-	
-	public ClientesGateway getClientesGateway() {
-		return new ClientesGatewayImpl();
-	}
+    public FacturasGateway getFacturaGateway() {
+	return new FacturasGatewayImpl();
+    }
+
+    public AveriasGateway getAveriasGateway() {
+	return new AveriasGatewayImpl();
+    }
+
+    public ClientesGateway getClientesGateway() {
+	return new ClientesGatewayImpl();
+    }
 }

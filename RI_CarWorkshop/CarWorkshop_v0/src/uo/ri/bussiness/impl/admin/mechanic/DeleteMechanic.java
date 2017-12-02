@@ -8,20 +8,20 @@ import uo.ri.persistence.MecanicosGateway;
 
 public class DeleteMechanic {
 
-	private long idMecanico;
+    private long idMecanico;
 
-	public DeleteMechanic(long idMecanico) {
-		this.idMecanico = idMecanico;
-	}
+    public DeleteMechanic(long idMecanico) {
+	this.idMecanico = idMecanico;
+    }
 
-	public void execute() {
-		MecanicosGateway mecanicosGateway = new PersistenceFactory().getMecanicosGateway();
-		try {
-			mecanicosGateway.setConnection(Jdbc.getConnection());
-			mecanicosGateway.delete(idMecanico);
-		} catch (SQLException e) {
-			throw new RuntimeException(e);
-		}
+    public void execute() {
+	MecanicosGateway mecanicosGateway = new PersistenceFactory().getMecanicosGateway();
+	try {
+	    mecanicosGateway.setConnection(Jdbc.getConnection());
+	    mecanicosGateway.delete(idMecanico);
+	} catch (SQLException e) {
+	    throw new RuntimeException(e);
 	}
+    }
 
 }

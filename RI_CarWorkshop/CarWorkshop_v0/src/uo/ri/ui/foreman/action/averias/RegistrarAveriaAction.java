@@ -5,10 +5,10 @@ import alb.util.menu.Action;
 
 public class RegistrarAveriaAction implements Action {
 
-	@Override
-	public void execute() throws BusinessException {
-		// TODO Auto-generated method stub
+    @Override
+    public void execute() throws BusinessException {
+	// TODO Auto-generated method stub
 
-	}
+    }
 
 }

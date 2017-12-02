@@ -18,14 +18,14 @@ public class DeleteCliente {
     public void execute() throws BusinessException {
 	ClientesGateway clientesGateway = new PersistenceFactory().getClientesGateway();
 	try {
-	    if(numeroVehiculosCliente() == 0) {
+	    if (numeroVehiculosCliente() == 0) {
 		clientesGateway.setConnection(Jdbc.getConnection());
 		clientesGateway.delete_mediopago(idCliente);
 		clientesGateway.setConnection(Jdbc.getConnection());
 		clientesGateway.delte_recomendaciones(idCliente);
 		clientesGateway.setConnection(Jdbc.getConnection());
 		clientesGateway.delete(idCliente);
-	    }else {
+	    } else {
 		throw new BusinessException("No se puede eliminar un cliente con vehículos registrados en taller");
 	    }
 	} catch (SQLException e) {

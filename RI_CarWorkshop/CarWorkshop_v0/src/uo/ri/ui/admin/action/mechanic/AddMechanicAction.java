@@ -7,18 +7,18 @@ import uo.ri.conf.ServicesFactory;
 
 public class AddMechanicAction implements Action {
 
-	@Override
-	public void execute() throws BusinessException {
+    @Override
+    public void execute() throws BusinessException {
 
-		String nombre = Console.readString("Nombre");
-		String apellidos = Console.readString("Apellidos");
-		String dni = Console.readString("dni");
+	String nombre = Console.readString("Nombre");
+	String apellidos = Console.readString("Apellidos");
+	String dni = Console.readString("dni");
 
-		ServicesFactory servicesFactory = new ServicesFactory();
+	ServicesFactory servicesFactory = new ServicesFactory();
 
-		servicesFactory.getAdminService().newMechanic(nombre, apellidos,dni);
+	servicesFactory.getAdminService().newMechanic(nombre, apellidos, dni);
 
-		Console.println("Nuevo mecánico añadido");
-	}
+	Console.println("Nuevo mecánico añadido");
+    }
 
 }

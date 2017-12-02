@@ -10,17 +10,16 @@ import uo.ri.persistence.MecanicosGateway;
 
 public class FindAllMechanics {
 
-	public List<Map<String, Object>> execute() {
-		MecanicosGateway mecanicosGetaway = new PersistenceFactory().getMecanicosGateway();
-		List<Map<String, Object>> mecanicos = null;
-		try {
-			mecanicosGetaway.setConnection( Jdbc.getConnection());
-			mecanicos = mecanicosGetaway.findAll();
-		} catch (SQLException e) {
-			throw new RuntimeException(e);
-		}
-
-		
-		return mecanicos;
+    public List<Map<String, Object>> execute() {
+	MecanicosGateway mecanicosGetaway = new PersistenceFactory().getMecanicosGateway();
+	List<Map<String, Object>> mecanicos = null;
+	try {
+	    mecanicosGetaway.setConnection(Jdbc.getConnection());
+	    mecanicos = mecanicosGetaway.findAll();
+	} catch (SQLException e) {
+	    throw new RuntimeException(e);
 	}
+
+	return mecanicos;
+    }
 }

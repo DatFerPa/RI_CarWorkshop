@@ -12,6 +12,6 @@ public interface AdminService {
     public void updateMechanic(Long id, String nombre, String apellidos);
 
     public List<Map<String, Object>> findAllMechanics();
-    
+
     public void generarBonosTresAverias();
 }

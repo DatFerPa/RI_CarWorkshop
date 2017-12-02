@@ -9,16 +9,16 @@ import uo.ri.bussiness.impl.ForemanServiceImpl;
 
 public class ServicesFactory {
 
-	public AdminService getAdminService() {
-		return new AdminServiceImpl();
-	}
+    public AdminService getAdminService() {
+	return new AdminServiceImpl();
+    }
 
-	public CashService getCashService() {
-		return new CashServiceImpl();
-	}
-	
-	public ForemanService getForemanService() {
-		return new ForemanServiceImpl();
-	}
+    public CashService getCashService() {
+	return new CashServiceImpl();
+    }
+
+    public ForemanService getForemanService() {
+	return new ForemanServiceImpl();
+    }
 
 }

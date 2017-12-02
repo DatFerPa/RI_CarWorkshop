@@ -13,7 +13,7 @@ public class DetalleClienteAction implements Action {
 	Console.println("\nDetalles de un cliente");
 
 	ServicesFactory servicesFactory = new ServicesFactory();
-	
+
 	Long id = Console.readLong("Inserte el id del cliente que desea ver");
 
 	Map<String, Object> cliente = servicesFactory.getForemanService().findCliente(id);
