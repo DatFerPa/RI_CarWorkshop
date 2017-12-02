@@ -20,8 +20,8 @@ public class ForemanServiceImpl implements ForemanService {
 
 	@Override
 	public void updateCliente(Long id, String nombre, String apellidos, String street, String ciudad, String zipcode,
-			String telefono, String email, String dni) {
-		new UpdateCliente(id, dni, nombre, apellidos, street, ciudad, zipcode, telefono, email).execute();
+			String telefono, String email) {
+		new UpdateCliente(id,nombre, apellidos, street, ciudad, zipcode, telefono, email).execute();
 
 	}
 

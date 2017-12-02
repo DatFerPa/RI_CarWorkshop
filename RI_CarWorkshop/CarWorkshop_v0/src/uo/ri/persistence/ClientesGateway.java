@@ -15,7 +15,7 @@ public interface ClientesGateway {
 	public List<Map<String, Object>> findRecomendados(Long id);
 
 	public void update(Long id, String nombre, String apellidos, String street, String ciudad, String zipcode,
-			String telefono, String email,String dni);
+			String telefono, String email);
 
 	public void save( String nombre, String apellidos, String street, String ciudad, String zipcode,
 			String telefono, String email,String dni);
@@ -29,4 +29,6 @@ public interface ClientesGateway {
 	public void delete_mediopago(Long id);
 	
 	public void delte_recomendaciones(Long id);
+	
+	public long getLastClienteId();
 }

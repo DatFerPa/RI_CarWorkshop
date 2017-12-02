@@ -9,7 +9,6 @@ import uo.ri.persistence.ClientesGateway;
 public class UpdateCliente {
 	
 	private Long id;
-	private String dni;
 	private String nombre;
 	private String apellidos;
 	private String calle;
@@ -18,10 +17,9 @@ public class UpdateCliente {
 	private String telefono;
 	private String email;
 	
-	public UpdateCliente(Long id, String dni, String nombre, String apellidos, String calle, String ciudad,
+	public UpdateCliente(Long id, String nombre, String apellidos, String calle, String ciudad,
 			String zipcode, String telefono, String email) {
 		this.id = id;
-		this.dni = dni;
 		this.nombre = nombre;
 		this.apellidos = apellidos;
 		this.calle = calle;
@@ -37,7 +35,7 @@ public class UpdateCliente {
 		
 		try {
 			clientesGateway.setConnection(Jdbc.getConnection());
-			clientesGateway.update(id, nombre, apellidos, calle, ciudad, zipcode, telefono, email, dni);
+			clientesGateway.update(id, nombre, apellidos, calle, ciudad, zipcode, telefono, email);
 		
 		}catch(SQLException e) {
 			throw new RuntimeException();

@@ -10,7 +10,7 @@ public interface ForemanService {
 	public void deleteCliente(Long id);
 	
 	public void updateCliente(Long id, String nombre, String apellidos, String street, String ciudad, String zipcode,
-			String telefono, String email,String dni);
+			String telefono, String email);
 
 	public List<Map<String,Object>> findAllClients();
 	

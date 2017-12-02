@@ -34,8 +34,32 @@ public class CreateCliente {
 		try {
 			clientesGateway.setConnection(Jdbc.getConnection());
 			clientesGateway.save(nombre, apellidos, calle, ciudad, zipcode, telefono, email,dni);
+			Long idCliente = UltimoClienteIdentificador();
+			createMetalico(idCliente);
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+	private long UltimoClienteIdentificador() {
+		ClientesGateway clientesGateway = new PersistenceFactory().getClientesGateway();
+		long id = 0;
+		try {
+			clientesGateway.setConnection(Jdbc.getConnection());
+			id = clientesGateway.getLastClienteId();
 			
 		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+		return id;
+	}
+	
+	private void createMetalico(Long id) {
+		ClientesGateway clientesGateway = new PersistenceFactory().getClientesGateway();
+		try {
+			clientesGateway.setConnection(Jdbc.getConnection());
+			clientesGateway.createMediopagoMetalico(id);
+		}catch (SQLException e) {
 			throw new RuntimeException(e);
 		}
 	}

@@ -21,8 +21,8 @@ public class AddMechanic {
 		// Procesar	
 		MecanicosGateway mecanicosGetaway = new PersistenceFactory().getMecanicosGateway();
 		try {
-		mecanicosGetaway.setConnection(Jdbc.getConnection());
-		mecanicosGetaway.save(nombre, apellidos);
+			mecanicosGetaway.setConnection(Jdbc.getConnection());
+			mecanicosGetaway.save(nombre, apellidos);
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
 		}
