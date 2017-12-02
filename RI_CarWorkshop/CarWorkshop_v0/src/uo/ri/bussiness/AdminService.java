@@ -5,7 +5,7 @@ import java.util.Map;
 
 public interface AdminService {
 
-	public void newMechanic(String nombre, String apellidos);
+	public void newMechanic(String nombre, String apellidos,String dni);
 
 	public void deleteMechanic(Long id);
 

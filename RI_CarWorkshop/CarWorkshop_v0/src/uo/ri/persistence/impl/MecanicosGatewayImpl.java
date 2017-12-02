@@ -16,8 +16,8 @@ import uo.ri.persistence.MecanicosGateway;
 public class MecanicosGatewayImpl implements MecanicosGateway {
 
 	private static String SQL_INSERTAR_MECANICO = "SQL_INSERT_MECHANIC";
-	private static String SQL_LISTAR_TODOS_MECANICOS = "SQL_DELETE_MECHANIC";
-	private static String SQL_ELIMINAR_MECANICO = "SQL_LIST_MECHANICS";
+	private static String SQL_LISTAR_TODOS_MECANICOS = "SQL_LIST_MECHANICS";
+	private static String SQL_ELIMINAR_MECANICO = "SQL_DELETE_MECHANIC";
 	private static String SQL_ACTUALIZAR_MECANICO = "SQL_UPDATE_MECHANIC";
 
 	Connection conection = null;
@@ -48,8 +48,9 @@ public class MecanicosGatewayImpl implements MecanicosGateway {
 				HashMap<String, Object> mecanico = new HashMap<String, Object>();
 
 				mecanico.put("id", rs.getLong(1));
-				mecanico.put("nombre", rs.getString(2));
-				mecanico.put("apellidos", rs.getString(3));
+				mecanico.put("dni", rs.getLong(2));
+				mecanico.put("nombre", rs.getString(3));
+				mecanico.put("apellidos", rs.getString(4));
 
 				mecanicos.add(mecanico);
 			}
@@ -87,12 +88,13 @@ public class MecanicosGatewayImpl implements MecanicosGateway {
 	}
 
 	@Override
-	public void save(String nombre, String apellidos) {
+	public void save(String nombre, String apellidos,String dni) {
 		PreparedStatement pst = null;
 		try {
 			pst = conection.prepareStatement(Conf.get(SQL_INSERTAR_MECANICO));
 			pst.setString(1, nombre);
 			pst.setString(2, apellidos);
+			pst.setString(3, dni);
 			pst.executeUpdate();
 		} catch (SQLException e) {
 			throw new RuntimeException(e);

@@ -1,4 +1,4 @@
-package uo.ri.ui.admin.action;
+package uo.ri.ui.admin.action.mechanic;
 
 import java.util.List;
 import java.util.Map;
@@ -19,7 +19,7 @@ public class ListMechanicsAction implements Action {
 
 		List<Map<String, Object>> mecanicos = servicesFactory.getAdminService().findAllMechanics();
 		for (Map<String, Object> mecanico : mecanicos) {
-			Console.println("Id: " + mecanico.get("id") + " - Nombre: " + mecanico.get("nombre") + " - Apellidos: "
+			Console.println("Id: " + mecanico.get("id") + " - Dni: " + mecanico.get("dni") + " - Nombre: " + mecanico.get("nombre") + " - Apellidos: "
 					+ mecanico.get("apellidos"));
 		}
 	}

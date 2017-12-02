@@ -2,8 +2,8 @@ package uo.ri.ui.foreman;
 
 import alb.util.menu.BaseMenu;
 import alb.util.menu.NotYetImplementedAction;
-import uo.ri.ui.foreman.action.ModificarAveriaAction;
-import uo.ri.ui.foreman.action.RegistrarAveriaAction;
+import uo.ri.ui.foreman.action.averias.ModificarAveriaAction;
+import uo.ri.ui.foreman.action.averias.RegistrarAveriaAction;
 
 public class RecepcionMenu extends BaseMenu {
 

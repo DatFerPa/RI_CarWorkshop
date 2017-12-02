@@ -1,25 +1,24 @@
-package uo.ri.ui.admin.action;
+package uo.ri.ui.admin.action.mechanic;
 
 import alb.util.console.Console;
 import alb.util.menu.Action;
 import uo.ri.common.BusinessException;
 import uo.ri.conf.ServicesFactory;
 
-public class UpdateMechanicAction implements Action {
+public class AddMechanicAction implements Action {
 
 	@Override
 	public void execute() throws BusinessException {
 
-		// Pedir datos
-		Long id = Console.readLong("Id del mecánico");
 		String nombre = Console.readString("Nombre");
 		String apellidos = Console.readString("Apellidos");
+		String dni = Console.readString("dni");
 
 		ServicesFactory servicesFactory = new ServicesFactory();
-		servicesFactory.getAdminService().updateMechanic(id, nombre, apellidos);
 
-		// Mostrar resultado
-		Console.println("Mecánico actualizado");
+		servicesFactory.getAdminService().newMechanic(nombre, apellidos,dni);
+
+		Console.println("Nuevo mecánico añadido");
 	}
 
 }

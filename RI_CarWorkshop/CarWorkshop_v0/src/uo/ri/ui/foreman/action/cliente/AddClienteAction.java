@@ -1,4 +1,4 @@
-package uo.ri.ui.foreman.action;
+package uo.ri.ui.foreman.action.cliente;
 
 import alb.util.console.Console;
 import alb.util.menu.Action;
@@ -21,8 +21,18 @@ public class AddClienteAction implements Action{
 		ServicesFactory servicesFactory = new ServicesFactory();
 		
 		servicesFactory.getForemanService().newCliente(dni,nombre, apellidos, calle, ciudad, zipcode, telefono, email);
-		
 		Console.println("Nuevo cliente añadido");
+		String recomendado = "";
+		
+		do {
+			recomendado = Console.readString("¿Viene recomendado? SI/NO");
+		} while (!recomendado.equals("SI")&&!recomendado.equals("NO"));
+		if(recomendado.equals("SI")) {
+		    Long idRecomendador = Console.readLong("Indetificador del usuario del que venga recomendado");
+		    servicesFactory.getForemanService().crearRecomendacionUltimoCliente(idRecomendador);
+		}
+		
+		Console.println("Recomendación añadida");
 	}
 	
 

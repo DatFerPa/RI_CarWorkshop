@@ -1,4 +1,4 @@
-package uo.ri.ui.foreman.action;
+package uo.ri.ui.foreman.action.cliente;
 
 import alb.util.console.Console;
 import alb.util.menu.Action;

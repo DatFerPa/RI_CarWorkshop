@@ -12,8 +12,8 @@ import uo.ri.bussiness.impl.admin.UpdateMechanic;
 public class AdminServiceImpl implements AdminService {
 
 	@Override
-	public void newMechanic(String nombre, String apellidos) {
-		new AddMechanic(nombre, apellidos).execute();
+	public void newMechanic(String nombre, String apellidos,String dni) {
+		new AddMechanic(nombre, apellidos,dni).execute();
 
 	}
 

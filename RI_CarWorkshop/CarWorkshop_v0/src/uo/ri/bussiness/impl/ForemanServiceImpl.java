@@ -8,12 +8,15 @@ import uo.ri.bussiness.impl.foreman.CreateCliente;
 import uo.ri.bussiness.impl.foreman.DeleteCliente;
 import uo.ri.bussiness.impl.foreman.FindAllClientes;
 import uo.ri.bussiness.impl.foreman.FindCliente;
+import uo.ri.bussiness.impl.foreman.FindClientesRecomendados;
 import uo.ri.bussiness.impl.foreman.UpdateCliente;
+import uo.ri.bussiness.impl.foreman.crearRecomendacionUltimoCliente;
+import uo.ri.common.BusinessException;
 
 public class ForemanServiceImpl implements ForemanService {
 
 	@Override
-	public void deleteCliente(Long id) {
+	public void deleteCliente(Long id) throws BusinessException {
 		new DeleteCliente(id).execute();
 
 	}
@@ -40,6 +43,17 @@ public class ForemanServiceImpl implements ForemanService {
 	@Override
 	public Map<String, Object> detalleCliente(Long id) {
 		return new FindCliente(id).execute();
+	}
+
+	@Override
+	public List<Map<String, Object>> finClientesRecomendados(Long id) {
+	    return new FindClientesRecomendados(id).execute();
+	}
+
+	@Override
+	public void crearRecomendacionUltimoCliente(Long idRecomendador) throws BusinessException {
+	    new  crearRecomendacionUltimoCliente(idRecomendador).execute();
+	    
 	}
 
 }

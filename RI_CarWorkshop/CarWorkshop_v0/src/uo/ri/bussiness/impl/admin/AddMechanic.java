@@ -11,10 +11,12 @@ public class AddMechanic {
 
 	private String nombre;
 	private String apellidos;
+	private String dni;
 
-	public AddMechanic(String nombre, String apellidos) {
+	public AddMechanic(String nombre, String apellidos,String dni) {
 		this.nombre = nombre;
 		this.apellidos = apellidos;
+		this.dni = dni;
 	}
 
 	public void execute() {
@@ -22,7 +24,7 @@ public class AddMechanic {
 		MecanicosGateway mecanicosGetaway = new PersistenceFactory().getMecanicosGateway();
 		try {
 			mecanicosGetaway.setConnection(Jdbc.getConnection());
-			mecanicosGetaway.save(nombre, apellidos);
+			mecanicosGetaway.save(nombre, apellidos,dni);
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
 		}

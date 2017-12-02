@@ -14,7 +14,7 @@ public interface MecanicosGateway {
 
 	public void update(Long id, String nombre, String apellidos);
 
-	public void save(String nombre, String apellidos);
+	public void save(String nombre, String apellidos,String dni);
 
 	public void delete(Long id);
 

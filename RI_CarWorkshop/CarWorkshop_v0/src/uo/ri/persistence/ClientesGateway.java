@@ -31,4 +31,8 @@ public interface ClientesGateway {
 	public void delte_recomendaciones(Long id);
 	
 	public long getLastClienteId();
+	
+	public List<String> getEstadosFacturasCliente(Long id);
+	
+	public int getNumeroCochesCliente(Long id);
 }
